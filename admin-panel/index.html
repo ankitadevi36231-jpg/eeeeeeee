@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — isaiyaa.bd</title>
+  <link rel="icon" href="https://i.postimg.cc/h4NZkpY8/image.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- ============ LOGIN ============ -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card glass-card">
+      <img src="https://i.postimg.cc/h4NZkpY8/image.png" alt="logo" class="login-logo">
+      <h1>Admin Panel</h1>
+      <p class="login-sub">isaiyaa.bd — Premium Digital Store</p>
+      <div class="field">
+        <label>Admin Password</label>
+        <input type="password" id="loginPass" placeholder="Enter admin password" autocomplete="current-password">
+      </div>
+      <div class="pm-error" id="loginError" style="display:none"></div>
+      <button class="btn btn-primary" id="loginBtn" style="width:100%">Login →</button>
+      <a class="login-back" href="/">← Back to store</a>
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div class="admin-app" id="adminApp" hidden>
+    <aside class="sidebar">
+      <div class="side-brand">
+        <img src="https://i.postimg.cc/h4NZkpY8/image.png" alt="logo">
+        <div><b>isaiyaa.bd</b><small>Admin Panel</small></div>
+      </div>
+      <nav class="side-nav">
+        <button class="side-link active" data-view="dashboard"><span>📊</span> Dashboard</button>
+        <button class="side-link" data-view="orders"><span>🛒</span> Orders <em class="badge-dot" id="pendingBadge" hidden>0</em></button>
+        <button class="side-link" data-view="products"><span>📦</span> Products</button>
+        <button class="side-link" data-view="reviews"><span>⭐</span> Reviews</button>
+        <button class="side-link" data-view="settings"><span>⚙️</span> Settings</button>
+      </nav>
+      <div class="side-foot">
+        <a class="btn btn-ghost btn-sm" href="/" target="_blank">🌐 View Store</a>
+        <button class="btn btn-danger btn-sm" id="logoutBtn">Logout</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="topbar">
+        <h2 id="viewTitle">Dashboard</h2>
+        <button class="btn btn-primary btn-sm" id="addProductBtn" hidden>+ Add Product</button>
+      </div>
+
+      <!-- Dashboard -->
+      <section class="view" id="view-dashboard">
+        <div class="stat-cards" id="statCards"></div>
+        <div class="panel">
+          <h3>Recent Orders</h3>
+          <div class="table-wrap" id="recentOrdersWrap"></div>
+        </div>
+      </section>
+
+      <!-- Orders -->
+      <section class="view" id="view-orders" hidden>
+        <div class="toolbar">
+          <div class="filter-chips" id="orderFilters">
+            <button class="chip active" data-f="all">All</button>
+            <button class="chip" data-f="pending">Pending</button>
+            <button class="chip" data-f="processing">Processing</button>
+            <button class="chip" data-f="completed">Completed</button>
+            <button class="chip" data-f="cancelled">Cancelled</button>
+          </div>
+          <input type="text" id="orderSearch" class="search-input" placeholder="Search by Order ID, TrxID or WhatsApp...">
+        </div>
+        <div class="panel"><div class="table-wrap" id="ordersWrap"></div></div>
+      </section>
+
+      <!-- Products -->
+      <section class="view" id="view-products" hidden>
+        <div class="panel"><div class="table-wrap" id="productsWrap"></div></div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="view" id="view-reviews" hidden>
+        <div class="panel"><div class="table-wrap" id="reviewsWrap"></div></div>
+      </section>
+
+      <!-- Settings -->
+      <section class="view" id="view-settings" hidden>
+        <form class="panel settings-form" id="settingsForm">
+          <h3>Store & Contact</h3>
+          <div class="set-grid">
+            <div class="field"><label>Site Name</label><input name="siteName"></div>
+            <div class="field"><label>Tagline</label><input name="tagline"></div>
+            <div class="field"><label>Your WhatsApp Number</label><input name="whatsapp" placeholder="01824554565"></div>
+            <div class="field"><label>Telegram Username</label><input name="telegram" placeholder="Devoloper_Emon"></div>
+          </div>
+          <h3>Payment Methods</h3>
+          <div class="set-grid">
+            <div class="field"><label>bKash Number</label><input name="bkashNumber"></div>
+            <div class="field"><label>bKash Account Type</label>
+              <select name="bkashType"><option>Personal</option><option>Agent</option><option>Merchant</option></select></div>
+            <div class="field"><label>Nagad Number</label><input name="nagadNumber"></div>
+            <div class="field"><label>Nagad Account Type</label>
+              <select name="nagadType"><option>Personal</option><option>Agent</option><option>Merchant</option></select></div>
+            <div class="field"><label>Binance Pay ID (USDT)</label><input name="binanceId"></div>
+            <div class="field"><label>BTC Wallet Address</label><input name="btcAddress"></div>
+            <div class="field"><label>LTC Wallet Address</label><input name="ltcAddress"></div>
+          </div>
+          <h3>Order Notification (Telegram Bot)</h3>
+          <div class="set-grid">
+            <div class="field"><label>Bot Token</label><input name="botToken" placeholder="123456:ABC-..."></div>
+            <div class="field"><label>Chat ID</label><input name="chatId"></div>
+          </div>
+          <p class="footer-note">When a customer places an order, full details are sent instantly to this Telegram chat.</p>
+          <h3>Security</h3>
+          <div class="set-grid">
+            <div class="field"><label>New Admin Password <small>(leave blank to keep current)</small></label><input type="password" name="newPassword" autocomplete="new-password"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">💾 Save Settings</button>
+        </form>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Product modal -->
+  <div class="pm-overlay" id="prodModal">
+    <div class="pm-modal pm-modal-lg">
+      <div class="pm-head"><h3 id="prodModalTitle" style="font-size:18px;margin:0">Add Product</h3>
+        <button class="pm-close" id="prodModalClose" style="margin-left:auto">✕</button></div>
+      <form class="pm-body" id="prodForm">
+        <div class="set-grid">
+          <div class="field"><label>Product Title *</label><input name="title" required maxlength="120"></div>
+          <div class="field"><label>Category *</label>
+            <select name="category">
+              <option value="vpn">🛡️ VPN</option>
+              <option value="accounts">👑 Premium Accounts</option>
+              <option value="cards">💳 Cards (Visa/Master)</option>
+              <option value="apps">📱 Apps</option>
+              <option value="facebook">📘 Facebook</option>
+              <option value="courses">🎓 Courses</option>
+              <option value="other">⭐ Other</option>
+            </select></div>
+          <div class="field"><label>Price (BDT ৳) *</label><input type="number" name="price" min="0" step="1" required></div>
+          <div class="field"><label>Status</label>
+            <select name="active"><option value="true">✅ Active (visible on store)</option><option value="false">🚫 Hidden</option></select></div>
+        </div>
+        <div class="field"><label>Description *</label><textarea name="description" rows="4" required></textarea></div>
+        <div class="field"><label>Features / Benefits <small>(one per line)</small></label>
+          <textarea name="features" rows="5" placeholder="Genuine product&#10;Instant delivery&#10;Full warranty"></textarea></div>
+        <div class="set-grid">
+          <div class="field"><label>Product Image (upload)</label><input type="file" name="image" accept="image/*" id="prodImgFile">
+            <img id="prodImgPrev" class="pm-shot-preview" alt="" hidden></div>
+          <div class="field"><label>…or Image URL</label><input name="imageUrl" placeholder="https://..."></div>
+        </div>
+        <div class="pm-error" id="prodError" style="display:none"></div>
+        <div class="pm-actions">
+          <button type="button" class="btn btn-ghost" id="prodCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="prodSave">💾 Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Screenshot viewer -->
+  <div class="pm-overlay" id="shotModal">
+    <div class="pm-modal" style="width:min(640px,100%)">
+      <div class="pm-head"><h3 style="font-size:16px;margin:0">Payment Screenshot</h3>
+        <button class="pm-close" id="shotClose" style="margin-left:auto">✕</button></div>
+      <div class="pm-body"><img id="shotImg" style="width:100%;border-radius:14px" alt="Payment screenshot">
+        <a class="btn btn-ghost btn-sm" id="shotOpen" target="_blank" rel="noopener" style="margin-top:12px">🔍 Open full size</a></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script src="js/admin.js"></script>
+
+</body>
+</html>

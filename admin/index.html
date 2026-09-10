@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — isaiyaa.bd</title>
+<link rel="icon" href="https://i.postimg.cc/h4NZkpY8/image.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body class="login-body">
+  <div class="login-card">
+    <img class="login-logo" src="https://i.postimg.cc/h4NZkpY8/image.png" alt="logo">
+    <h1>isaiyaa<b>.bd</b></h1>
+    <p class="sub">Admin Panel — Private Access</p>
+    <form id="loginForm">
+      <div class="field">
+        <label>Admin Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="pw" placeholder="Enter admin password" autocomplete="current-password" required>
+          <button type="button" id="pwToggle" aria-label="Show password">👁</button>
+        </div>
+      </div>
+      <div class="err" id="loginErr"></div>
+      <button class="btn-primary btn-block" type="submit" id="loginBtn">🔓 Login to Dashboard</button>
+    </form>
+    <a class="back" href="/">← Back to Store</a>
+  </div>
+  <script>
+    /* already logged in? go straight to dashboard */
+    if (localStorage.getItem('isa_token')) location.href = '/admin/dashboard.html';
+    document.getElementById('pwToggle').addEventListener('click', () => {
+      const pw = document.getElementById('pw');
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('loginErr');
+      err.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Checking...';
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: document.getElementById('pw').value })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Login failed');
+        localStorage.setItem('isa_token', data.token);
+        location.href = '/admin/dashboard.html';
+      } catch (ex) {
+        err.textContent = ex.message;
+        btn.disabled = false;
+        btn.textContent = '🔓 Login to Dashboard';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — isaiyaa.bd Admin</title>
+<link rel="icon" href="https://i.postimg.cc/h4NZkpY8/image.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="side">
+    <div class="side-brand">
+      <img src="https://i.postimg.cc/h4NZkpY8/image.png" alt="logo">
+      <div>
+        <div class="n">isaiyaa<b>.bd</b></div>
+        <div class="s">Admin Panel</div>
+      </div>
+    </div>
+    <nav>
+      <button class="snav active" data-tab="dash"><span>📊</span><span class="lbl">Dashboard</span></button>
+      <button class="snav" data-tab="orders"><span>🛒</span><span class="lbl">Orders</span><span class="pill" id="pillOrders"></span></button>
+      <button class="snav" data-tab="products"><span>📦</span><span class="lbl">Products</span></button>
+      <button class="snav" data-tab="reviews"><span>⭐</span><span class="lbl">Reviews</span><span class="pill" id="pillReviews"></span></button>
+      <button class="snav" data-tab="settings"><span>⚙️</span><span class="lbl">Settings</span></button>
+    </nav>
+    <div class="side-foot">
+      <button id="logout">⏻ Logout</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <section id="tab-dash">
+      <div class="topbar">
+        <div><h1>Dashboard</h1><div class="hint">Overview of your store</div></div>
+        <button class="btn-primary" data-goto="orders">View All Orders</button>
+      </div>
+      <div class="stats" id="statCards"></div>
+      <div class="card">
+        <h2>🕐 Recent Orders</h2>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Order ID</th><th>Product</th><th>Price</th><th>Method</th><th>Status</th></tr></thead>
+            <tbody id="recentOrders"><tr><td colspan="5" class="empty-td">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="tab-orders" hidden>
+      <div class="topbar">
+        <div><h1>Orders</h1><div class="hint">Review payments and deliver products via WhatsApp</div></div>
+        <button class="btn-primary" id="refreshOrders">↻ Refresh</button>
+      </div>
+      <div class="filter-row">
+        <select id="orderFilter">
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="delivered">Delivered</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <input type="text" id="orderSearch" placeholder="Search by product, TRX ID, WhatsApp...">
+      </div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Order ID</th><th>Product</th><th>Price</th><th>Method</th><th>Amount</th><th>TrxID</th><th>WhatsApp</th><th>Proof</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="ordersBody"><tr><td colspan="10" class="empty-td">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="tab-products" hidden>
+      <div class="topbar">
+        <div><h1>Products</h1><div class="hint">Add, edit or remove products — changes show on the store instantly</div></div>
+        <button class="btn-primary" id="btnAddProduct">+ Add Product</button>
+      </div>
+      <div class="adm-prods" id="admProdList"></div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="tab-reviews" hidden>
+      <div class="topbar">
+        <div><h1>Reviews</h1><div class="hint">Approve reviews to show them on the store</div></div>
+        <button class="btn-primary" id="refreshReviews">↻ Refresh</button>
+      </div>
+      <div id="revList"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="tab-settings" hidden>
+      <div class="topbar">
+        <div><h1>Settings</h1><div class="hint">Store info, payment accounts &amp; Telegram notifications</div></div>
+        <button class="btn-primary" id="saveSettings">💾 Save All Settings</button>
+      </div>
+      <div class="card">
+        <h2>🏪 Store Information</h2>
+        <div class="set-grid">
+          <div class="field"><label>Site Name</label><input class="ipt" id="setName"></div>
+          <div class="field"><label>Tagline</label><input class="ipt" id="setTagline"></div>
+          <div class="field"><label>WhatsApp Number (with country code, e.g. 8801824554565)</label><input class="ipt" id="setWa"></div>
+          <div class="field"><label>WhatsApp Display Number</label><input class="ipt" id="setWaDisplay"></div>
+          <div class="field"><label>Telegram Username (without @)</label><input class="ipt" id="setTg"></div>
+          <div class="field"><label>USD Rate (1 USD = ? BDT — used for crypto conversion)</label><input class="ipt" id="setUsd" type="number" step="0.01"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>📬 Telegram Order Notifications</h2>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px;line-height:1.7;">When a customer places an order, you get an instant Telegram message (with screenshot).<br>
+        <b style="color:#c9d2e8;">Setup:</b> 1) Message <span class="mono">@BotFather</span> on Telegram → send <span class="mono">/newbot</span> → copy the Bot Token. 2) Open your new bot and press START. 3) Message <span class="mono">@userinfobot</span> → it shows your Chat ID. Paste both below and save.</p>
+        <div class="set-grid">
+          <div class="field"><label>Bot Token</label><input class="ipt" id="setBotToken" placeholder="123456:ABC-xxxx..."></div>
+          <div class="field"><label>Your Chat ID</label><input class="ipt" id="setChatId" placeholder="e.g. 987654321"></div>
+        </div>
+        <button class="act-btn" id="testTg" style="margin-top:4px;">✈ Send Test Message</button>
+      </div>
+      <div class="card">
+        <h2>💳 Payment Methods</h2>
+        <div id="pmSettings"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="overlay" id="prodOverlay">
+  <div class="modal">
+    <button class="m-close" data-close="prodOverlay">✕</button>
+    <h2 id="prodModalTitle">Add Product</h2>
+    <form id="prodForm" class="form-grid">
+      <input type="hidden" id="pfId">
+      <div class="field full"><label>Product Title *</label><input class="ipt" id="pfTitle" required maxlength="120"></div>
+      <div class="field"><label>Category</label>
+        <select class="ipt" id="pfCategory">
+          <option value="vpn">Premium VPN</option>
+          <option value="account">Premium Accounts</option>
+          <option value="card">Visa / Master Cards</option>
+          <option value="apps">Premium Apps</option>
+          <option value="social">Social Media</option>
+          <option value="course">Premium Courses</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Badge (optional — e.g. HOT, NEW)</label><input class="ipt" id="pfBadge" maxlength="20"></div>
+      <div class="field"><label>Price (৳ BDT) *</label><input class="ipt" id="pfPrice" type="number" min="0" step="1" required></div>
+      <div class="field"><label>Old Price (optional, for discount)</label><input class="ipt" id="pfOldPrice" type="number" min="0" step="1"></div>
+      <div class="field"><label>Stock</label><input class="ipt" id="pfStock" type="number" min="0" step="1" value="10"></div>
+      <div class="field"><label>Product Image (max 5MB)</label>
+        <div class="img-pick" id="pfImgPick">
+          <div id="pfImgHint">📤 Click to upload image<br><small>or leave empty for default</small></div>
+          <input type="file" id="pfImage" accept="image/*">
+        </div>
+      </div>
+      <div class="field full"><label>Description *</label><textarea class="ipt" id="pfDesc" required></textarea></div>
+      <div class="field full"><label>Features (one per line)</label><textarea class="ipt" id="pfFeatures" placeholder="1 Year Warranty&#10;Instant Delivery&#10;24/7 Support"></textarea></div>
+      <div class="check-row full"><input type="checkbox" id="pfFeatured"><label for="pfFeatured" style="margin:0;">Show as Featured</label></div>
+      <div class="form-actions full">
+        <button type="submit" class="btn-primary" id="pfSave">💾 Save Product</button>
+        <button type="button" class="btn-ghost" data-close="prodOverlay">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/admin/js/admin.js"></script>
+</body>
+</html>

@@ -1,11 +1,7 @@
 # dependencies
 node_modules/
 
-# admin panel (kept in a separate private repository)
-admin/
-admin-panel/
-
-# private data — never publish
+# private data — never publish (contains Telegram bot token & customer info)
 data/settings.json
 data/orders.json
 uploads/
