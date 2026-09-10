@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# admin panel (kept in a separate private repository)
+admin/
+admin-panel/
+
+# private data — never publish
+data/settings.json
+data/orders.json
+uploads/
+
+# logs & OS files
+*.log
+.DS_Store
+Thumbs.db

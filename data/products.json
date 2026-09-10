@@ -1,0 +1,146 @@
+[
+  {
+    "id": "prd-001",
+    "title": "NordVPN Premium — 1 Month",
+    "category": "vpn",
+    "price": 450,
+    "image": "",
+    "description": "Get a genuine NordVPN Premium subscription with full access to 6000+ ultra-fast servers in 111 countries. Browse, stream and game with total privacy and military-grade encryption. Delivered to your WhatsApp within minutes after payment confirmation.",
+    "features": [
+      "100% genuine private account",
+      "Works on 6 devices at the same time",
+      "Ultra-fast servers — up to 10 Gbps",
+      "Unblocks Netflix, Disney+, Hulu & more",
+      "Strict no-logs policy",
+      "Full warranty & replacement support"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:00:00.000Z"
+  },
+  {
+    "id": "prd-002",
+    "title": "Netflix Premium 4K UHD — 1 Month",
+    "category": "accounts",
+    "price": 299,
+    "image": "",
+    "description": "Enjoy Netflix Premium with 4K Ultra HD quality on your own profile. Private profile with PIN, watch on TV, mobile, laptop — anywhere. Instant delivery to your WhatsApp after payment review.",
+    "features": [
+      "4K Ultra HD + HDR quality",
+      "Private profile with PIN lock",
+      "Works on all devices",
+      "1 month full warranty",
+      "Instant replacement if any issue",
+      "24/7 support on WhatsApp"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:05:00.000Z"
+  },
+  {
+    "id": "prd-003",
+    "title": "Visa Virtual Card — $5 Balance",
+    "category": "cards",
+    "price": 750,
+    "image": "",
+    "description": "Ready-to-use Visa virtual card for online payments, subscriptions and verifications. Loaded with $5 balance. Card details (number, expiry, CVV) delivered securely to your WhatsApp. Use it anywhere Visa is accepted online.",
+    "features": [
+      "Preloaded $5 balance",
+      "Works on all online merchants",
+      "Instant delivery after review",
+      "Full card details included",
+      "Perfect for subscriptions & trials",
+      "Safe & secure usage guide included"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:10:00.000Z"
+  },
+  {
+    "id": "prd-004",
+    "title": "Master Virtual Card — $5 Balance",
+    "category": "cards",
+    "price": 750,
+    "image": "",
+    "description": "Premium Mastercard virtual card preloaded with $5 balance. Accepts all online payments, Facebook ads, Google ads, subscriptions and more. Card credentials delivered to your WhatsApp after payment verification.",
+    "features": [
+      "Preloaded $5 balance",
+      "Accepted worldwide online",
+      "Works with ad platforms",
+      "Full card details included",
+      "Instant delivery after review",
+      "Usage support included"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:15:00.000Z"
+  },
+  {
+    "id": "prd-005",
+    "title": "Canva Pro — 1 Year (Own Email)",
+    "category": "apps",
+    "price": 199,
+    "image": "",
+    "description": "Upgrade your own email to Canva Pro for a full year. Unlock premium templates, background remover, magic tools, 100GB cloud storage and team features — on your personal account, nothing shared.",
+    "features": [
+      "Added to your own email",
+      "All premium templates unlocked",
+      "Background remover & magic tools",
+      "100GB cloud storage",
+      "1 year validity",
+      "100% safe — no password needed"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:20:00.000Z"
+  },
+  {
+    "id": "prd-006",
+    "title": "Facebook Aged Account (2018+)",
+    "category": "facebook",
+    "price": 350,
+    "image": "",
+    "description": "Old, aged Facebook account with real-looking activity history. Perfect for advertising, business pages and marketplace use. Email access included. Delivered with full login credentials to your WhatsApp.",
+    "features": [
+      "Aged 2018 or older",
+      "Email access included",
+      "Ads-ready accounts available",
+      "Full login credentials",
+      "Login guide provided",
+      "Replacement warranty"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:25:00.000Z"
+  },
+  {
+    "id": "prd-007",
+    "title": "Udemy Premium Course Bundle",
+    "category": "courses",
+    "price": 399,
+    "image": "",
+    "description": "Access premium Udemy courses of your choice — web development, graphic design, digital marketing, AI and more. Lifetime access with certificates. Course link delivered to your WhatsApp after payment.",
+    "features": [
+      "Any premium course of your choice",
+      "Lifetime access",
+      "Certificate included",
+      "Latest updated versions",
+      "Fast delivery on WhatsApp",
+      "Multiple course discounts available"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:30:00.000Z"
+  },
+  {
+    "id": "prd-008",
+    "title": "CapCut Pro — 1 Month",
+    "category": "apps",
+    "price": 249,
+    "image": "",
+    "description": "CapCut Pro subscription with all premium effects, filters, transitions and 4K export unlocked. Edit like a professional on mobile or PC. Delivered to your WhatsApp within minutes.",
+    "features": [
+      "All premium effects & filters",
+      "4K export unlocked",
+      "No watermark",
+      "Cloud space included",
+      "Works on mobile & PC",
+      "Full warranty for 1 month"
+    ],
+    "active": true,
+    "createdAt": "2026-09-08T10:35:00.000Z"
+  }
+]
