@@ -66,8 +66,47 @@ const DEFAULT_SETTINGS = {
   telegramChatId: '',
   usdRate: 122,
   logo: 'https://i.postimg.cc/h4NZkpY8/image.png',
-  payments: {}
+  payments: {
+    bkash: {
+      enabled: true, label: 'bKash', logo: 'https://i.postimg.cc/y8LddgcQ/image.png',
+      number: '01781099407', accountType: 'Personal',
+      instructions: "1. Open the Bkash app\n2. Tap 'Send Money'\n3. Enter the Bkash number above\n4. Send the exact amount\n5. Copy the Transaction ID (TrxID)"
+    },
+    nagad: {
+      enabled: true, label: 'Nagad', logo: 'https://i.postimg.cc/YSVC65Xv/image.png',
+      number: '01883336231', accountType: 'Personal',
+      instructions: "1. Open the Nagad app\n2. Tap 'Send Money'\n3. Enter the Nagad number above\n4. Send the exact amount\n5. Copy the Transaction ID (TrxID)"
+    },
+    binance: {
+      enabled: true, label: 'Binance Pay', logo: 'https://i.postimg.cc/vHMHtLvJ/image.png',
+      number: '385924176', accountType: 'USDT',
+      instructions: "1. Open the Binance app\n2. Tap 'Pay' -> Send\n3. Enter the Binance Pay ID above\n4. Send the exact USDT amount shown\n5. Take a screenshot of the payment"
+    },
+    btc: {
+      enabled: true, label: 'Bitcoin (BTC)', logo: 'https://i.postimg.cc/Sx1Sq0b7/image.png',
+      number: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', accountType: 'BTC Network',
+      instructions: "1. Open your crypto wallet\n2. Send the exact BTC amount shown\n3. Use the Bitcoin (BTC) network only\n4. Take a screenshot of the transaction"
+    },
+    ltc: {
+      enabled: true, label: 'Litecoin (LTC)', logo: 'https://i.postimg.cc/LsqH8yHY/image.png',
+      number: 'ltc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', accountType: 'LTC Network',
+      instructions: "1. Open your crypto wallet\n2. Send the exact LTC amount shown\n3. Use the Litecoin (LTC) network only\n4. Take a screenshot of the transaction"
+    }
+  }
 };
+
+/* self-heal: if settings.json is missing or corrupted, restore defaults automatically */
+const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+function ensureSettings() {
+  let ok = false;
+  try { JSON.parse(fs.readFileSync(SETTINGS_FILE, 'utf8')); ok = true; } catch { ok = false; }
+  if (!ok) {
+    try { if (fs.existsSync(SETTINGS_FILE)) fs.copyFileSync(SETTINGS_FILE, SETTINGS_FILE + '.corrupt.bak'); } catch {}
+    writeJSON('settings.json', DEFAULT_SETTINGS);
+    console.log('[settings] settings.json was missing/corrupt — restored defaults');
+  }
+}
+ensureSettings();
 
 /* site config for the storefront (always fresh) */
 app.get('/api/config', (req, res) => {
